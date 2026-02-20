@@ -1,0 +1,51 @@
+1. Introduction
+
+This document describes the functional and non-functional requirements of the project. The purpose of this project is to develop a system that solves specific user problems efficiently and effectively.
+
+2. Functional Requirements
+
+These requirements describe what the system should do.
+
+The system shall allow users to register and log in securely.
+
+The system shall allow users to create, edit, and delete records.
+
+The system shall store data in a structured database.
+
+The system shall provide search and filter functionality.
+
+The system shall generate reports based on stored data.
+
+The system shall allow admin to manage users and system settings.
+
+3. Non-Functional Requirements
+
+These requirements describe how the system should perform.
+
+The system should respond within 2–3 seconds.
+
+The system must ensure data security and user authentication.
+
+The system should be user-friendly and easy to navigate.
+
+The system must be compatible with modern web browsers.
+
+The system should handle multiple users simultaneously.
+
+4. Hardware Requirements
+
+Computer/Laptop
+
+Minimum 4GB RAM
+
+Stable Internet Connection
+
+5. Software Requirements
+
+Operating System (Windows/Linux/Mac)
+
+Programming Language (e.g., Python / Java / PHP)
+
+Database (MySQL / MongoDB)
+
+Web Browser
