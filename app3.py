@@ -208,31 +208,32 @@ models = {
 # 7. Save Models
 # --------------------------------------------------
 
-if not os.path.exists("saved_models"):
-    os.makedirs("saved_models")
+# if not os.path.exists("saved_models"):
+#     os.makedirs("saved_models")
 
-# Check if models already saved
-model_files = [
-    "KNN.pkl",
-    "Random_Forest.pkl",
-    "SVM.pkl",
-    "Logistic_Regression.pkl",
-    "XGBoost.pkl"
-]
+# # Check if models already saved
+# model_files = [
+#     "KNN.pkl",
+#     "Random_Forest.pkl",
+#     "SVM.pkl",
+#     "Logistic_Regression.pkl",
+#     "XGBoost.pkl"
+# ]
 
-models_exist = all(
-    os.path.exists(f"saved_models/{file}") for file in model_files
-)
+# models_exist = all(
+#     os.path.exists(f"saved_models/{file}") for file in model_files
+# )
 
-if not models_exist:
-    for name, model in models.items():
-        file_name = f"saved_models/{name.replace(' ', '_')}.pkl"
-        joblib.dump(model, file_name)
+# if not models_exist:
+#     for name, model in models.items():
+#         file_name = f"saved_models/{name.replace(' ', '_')}.pkl"
+#         joblib.dump(model, file_name)
 
-    joblib.dump(scaler, "saved_models/scaler.pkl")
-    st.sidebar.success("Models Saved Successfully!")
-else:
-    st.sidebar.info("Models already saved")
+#     joblib.dump(scaler, "saved_models/scaler.pkl")
+#     st.sidebar.success("Models Saved Successfully!")
+# else:
+#     st.sidebar.info("Models already saved")
+st.sidebar.info("Models already saved")
 
 # --------------------------------------------------
 # 📊 Accuracy Comparison
