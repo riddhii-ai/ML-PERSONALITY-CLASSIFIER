@@ -13,6 +13,17 @@ st.set_page_config(
     layout="wide"
 )
 
+st.markdown("""
+<h1 style='text-align: center;
+           font-size: 48px;
+           background: linear-gradient(90deg,#0CDDEC, #FEC700);
+           -webkit-background-clip: text;
+           -webkit-text-fill-color: transparent;
+           font-weight: bold;'>
+ AI Personality Intelligence Dashboard
+</h1>
+""", unsafe_allow_html=True)
+
 # --------------------------------------------------
 # 🎨 Load External CSS
 # --------------------------------------------------
