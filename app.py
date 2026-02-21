@@ -47,6 +47,41 @@ def load_models():
 
 models, scaler, le, accuracy_dict = load_models()
 
+#######################################################
+
+# --------------------------------------------------
+# 📌 Sidebar Section
+# --------------------------------------------------
+st.sidebar.title("📌 Project Information")
+
+st.sidebar.markdown("""
+### 🧠 AI Personality Intelligence System
+
+This AI model predicts personality type  
+based on behavioral activity metrics.
+
+### 🤖 Models Used:
+- KNN
+- Random Forest
+- SVM
+- Logistic Regression
+- XGBoost
+""")
+
+best_model = max(accuracy_dict, key=accuracy_dict.get)
+
+st.sidebar.success(f"🏆 Best Model: {best_model}")
+
+st.sidebar.markdown("---")
+
+st.sidebar.info("""
+📊 Built with:
+- Scikit-Learn
+- XGBoost
+- Streamlit
+- Matplotlib
+""")
+
 # --------------------------------------------------
 # 📊 Model Accuracy Overview
 # --------------------------------------------------
@@ -191,6 +226,8 @@ if st.session_state.get("prediction_done"):
     # RIGHT COLUMN (Radar Chart)
     with col2:
         fig, ax = plt.subplots(subplot_kw=dict(polar=True), figsize=(5,5))
+        ax.plot(angles, values, color="#FF4B91", linewidth=3)
+        ax.fill(angles, values, color="#FF4B91", alpha=0.3)
 
         ax.plot(angles, values, linewidth=3)
         ax.fill(angles, values, alpha=0.25)
