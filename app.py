@@ -130,6 +130,69 @@ if st.button("🚀 Predict Personality"):
     st.session_state.confidence = confidence
 
 ###############################################
+
+if st.session_state.get("prediction_done"):
+
+    summary, rec, hob = sumgen(st.session_state.prediction)
+
+    # Trait labels
+    traits = [
+        "Social", "Study", "Sleep", "Group",
+        "Productivity", "Creativity",
+        "Leadership", "Decision", "Consistency"
+    ]
+
+    values = [
+        social, study, sleep, group,
+        productivity, creativity,
+        leadership, decision, consistency
+    ]
+
+    # Radar chart setup
+    values += values[:1]
+    angles = np.linspace(0, 2 * np.pi, len(traits), endpoint=False).tolist()
+    angles += angles[:1]
+
+    col1, col2 = st.columns([1, 1])
+
+    # ---------------- LEFT COLUMN ----------------
+    with col1:
+        st.markdown(f"""
+        <div style="
+            background: linear-gradient(135deg, #E06AA1, #6E1A7A);
+            padding: 25px;
+            border-radius: 18px;
+            color: white;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        ">
+            <h2>🎯 Predicted Personality</h2>
+            <h3>{st.session_state.prediction}</h3>
+            <p style="font-size:18px;">
+                📊 Confidence Score: <b>{st.session_state.confidence:.2f}%</b>
+            </p>
+            <hr>
+            <p>{summary}</p>
+            <p><b>Recommendation:</b> {rec}</p>
+            <p><b>Suggested Hobbies:</b><br>{hob}</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    # ---------------- RIGHT COLUMN ----------------
+    with col2:
+        fig, ax = plt.subplots(subplot_kw=dict(polar=True), figsize=(5,5))
+
+        ax.plot(angles, values, linewidth=3)
+        ax.fill(angles, values, alpha=0.25)
+
+        ax.set_xticks(angles[:-1])
+        ax.set_xticklabels(traits)
+
+        ax.set_yticklabels([])
+        ax.set_title("Trait Radar Chart", pad=20)
+
+        st.pyplot(fig)
+
+#########################################################
 def sumgen(prediction):
 
     if prediction == "Independent":
