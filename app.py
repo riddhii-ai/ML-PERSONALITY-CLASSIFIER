@@ -13,6 +13,24 @@ def load_css(file_name):
 
 load_css("style.css")
 
+st.set_page_config(
+    page_title="AI Personality Classifier",
+    page_icon="🧠",
+    layout="wide"
+)
+
+st.markdown("""
+<h1 style='text-align: center;
+           font-size: 48px;
+           background: linear-gradient(90deg,#0CDDEC, #FEC700);
+           -webkit-background-clip: text;
+           -webkit-text-fill-color: transparent;
+           font-weight: bold;'>
+ AI Personality Intelligence Dashboard
+</h1>
+""", unsafe_allow_html=True)
+
+
 # --------------------------------------------------
 # Load Saved Models
 # --------------------------------------------------
