@@ -1,0 +1,38 @@
+.stApp {
+    background: linear-gradient(30deg, #510A32, #2D142C);
+    color: white;
+}
+
+.main-title {
+    text-align: center;
+    font-size: 42px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.stButton>button {
+    background: linear-gradient(180deg, #C72C41, #801336);
+    color: white;
+    border-radius: 12px;
+    height: 3em;
+    width: 100%;
+    font-size: 18px;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.stButton>button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    cursor: pointer;
+}
+        
+.stButton>button:active {
+    transform: scale(0.97);
+}
+
+div[data-testid="stDataFrame"] {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+}
