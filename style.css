@@ -1,38 +1,95 @@
+/* ============================= */
+/* MIDNIGHT EXECUTIVE PRO THEME */
+/* ============================= */
+
+:root {
+    --bg-main: #0f172a;
+    --bg-secondary: #111827;
+    --accent: #3b82f6;
+    --accent-soft: rgba(59, 130, 246, 0.4);
+    --text-main: #e5e7eb;
+    --glass: rgba(255, 255, 255, 0.05);
+}
+
+/* App Background */
 .stApp {
-    background: linear-gradient(30deg, #510A32, #2D142C);
+    background: linear-gradient(135deg, #0f172a, #111827, #1e293b);
+    background-size: 200% 200%;
+    animation: gradientShift 18s ease infinite;
+    color: var(--text-main);
+}
+
+/* Subtle moving background */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Main container glass */
+.block-container {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    border-radius: 18px;
+    padding: 2rem;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+}
+
+/* Title */
+.main-title {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: 1px;
     color: white;
 }
 
-.main-title {
-    text-align: center;
-    font-size: 42px;
-    font-weight: bold;
-    color: #ffffff;
-}
-
+/* Buttons */
 .stButton>button {
-    background: linear-gradient(180deg, #C72C41, #801336);
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
     color: white;
     border-radius: 12px;
     height: 3em;
     width: 100%;
-    font-size: 18px;
+    font-size: 16px;
     border: none;
     transition: all 0.3s ease;
 }
 
+/* Glow hover */
 .stButton>button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-    cursor: pointer;
+    transform: translateY(-3px);
+    box-shadow:
+        0 8px 20px var(--accent-soft),
+        0 0 25px var(--accent-soft);
 }
-        
+
+/* Click press */
 .stButton>button:active {
     transform: scale(0.97);
 }
 
+/* DataFrame styling */
 div[data-testid="stDataFrame"] {
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(10px);
-    border-radius: 12px;
+    background: var(--bg-secondary);
+    border-radius: 14px;
+    padding: 10px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+/* Input fields */
+input, textarea {
+    background: #1e293b !important;
+    color: white !important;
+    border-radius: 10px !important;
+    border: 1px solid #334155 !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-thumb {
+    background: #2563eb;
+    border-radius: 10px;
 }
