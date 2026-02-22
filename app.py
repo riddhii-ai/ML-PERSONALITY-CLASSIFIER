@@ -63,17 +63,6 @@ models, scaler, le, accuracy_dict = load_models()
 
 #######################################################
 
-def get_prediction_confidence(model, user_scaled, prediction):
-    probabilities = model.predict_proba(user_scaled)[0]
-    class_labels = model.classes_
-
-    predicted_index = np.where(class_labels == prediction)[0]
-    if predicted_index.size == 0:
-        return float(np.max(probabilities) * 100)
-
-    return float(probabilities[predicted_index[0]] * 100)
-##########################################################
-
 # --------------------------------------------------
 # 📌 Sidebar Section
 # --------------------------------------------------
@@ -106,8 +95,6 @@ st.sidebar.info("""
 - Streamlit
 - Matplotlib
 """)
-
-st.caption("Developed by riddhi-aii")
 
 # --------------------------------------------------
 # 📊 Model Accuracy Overview
@@ -211,7 +198,7 @@ if st.button("Predict Personality"):
     else:
         prediction = model.predict(user_scaled)[0]
 
-    confidence = get_prediction_confidence(model, user_scaled, prediction)
+    confidence = model.predict_proba(user_scaled).max() * 100
 
     st.session_state.prediction_done = True
     st.session_state.prediction = prediction
@@ -385,4 +372,4 @@ if st.session_state.get("prediction_done"):
 # Footer
 # --------------------------------------------------
 st.markdown("---")
-st.caption("Advanced AI/ML Personality Classification & Advisor Project | Production Ready Deployment")
+st.caption("Advanced AI/ML Personality Classification Project | Production Ready Deployment")
