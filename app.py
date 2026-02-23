@@ -13,16 +13,27 @@ st.set_page_config(
     layout="wide"
 )
 
+import streamlit as st
+
 st.markdown("""
-<h1 style='text-align: center;
-           font-size: 48px;
-           background: linear-gradient(90deg,#0CDDEC, #FEC700);
-           -webkit-background-clip: text;
-           -webkit-text-fill-color: transparent;
-           font-weight: bold;'>
- AI Personality Intelligence Dashboard
-</h1>
+<div class="hero-section">
+    <div class="hero-title">Persona-AI</div>
+    <div class="hero-subtitle">AI Personality Type Classifier</div>
+    <div class="hero-divider"></div>
+    <div class="hero-tagline">Transforming Activity Patterns into Intelligent Insights</div>
+</div>
 """, unsafe_allow_html=True)
+
+# st.markdown("""
+# <h1 style='text-align: center;
+#            font-size: 48px;
+#            background: linear-gradient(90deg,#7F00FF, #E100FF);
+#            -webkit-background-clip: text;
+#            -webkit-text-fill-color: transparent;
+#            font-weight: bold;'>
+#  AI Personality Intelligence Dashboard
+# </h1>
+# """, unsafe_allow_html=True)
 
 # --------------------------------------------------
 # 🎨 Load External CSS
@@ -64,52 +75,110 @@ models, scaler, le, accuracy_dict = load_models()
 #######################################################
 
 # --------------------------------------------------
-# 📌 Sidebar Section
+# 🚀 PREMIUM SIDEBAR - Persona-AI
 # --------------------------------------------------
-st.sidebar.title("📌 Project Information")
 
-st.sidebar.markdown("""
-### 🧠 AI Personality Intelligence System
-
-This AI model predicts personality type  
-based on behavioral activity metrics.
-
-### 🤖 Models Used:
-- KNN
-- Random Forest
-- SVM
-- Logistic Regression
-- XGBoost
-""")
-
-best_model = max(accuracy_dict, key=accuracy_dict.get)
-
-st.sidebar.success(f"🏆 Best Model: {best_model}")
+st.sidebar.markdown("## 🧠 Persona-AI Dashboard")
 
 st.sidebar.markdown("---")
 
-st.sidebar.info("""
-📊 Built with:
-- Scikit-Learn
-- XGBoost
-- Streamlit
-- Matplotlib
+# 📌 About Section
+st.sidebar.markdown("### 📌 About Project")
+st.sidebar.write("""
+AI-powered personality classification system  
+based on behavioral activity metrics.
+
+✔ 9 Input Features  
+✔ 4 Personality Classes  
+✔ Multiple ML Algorithms  
+✔ Real-time Prediction & Analysis
 """)
 
-# --------------------------------------------------
-# 📊 Model Accuracy Overview
-# --------------------------------------------------
-st.subheader("📊 Model Performance Overview")
+st.sidebar.markdown("---")
 
-cols = st.columns(len(accuracy_dict))
+# 🤖 Model Information
+st.sidebar.markdown("### 🤖 Models Implemented")
 
-for col, (name, acc) in zip(cols, accuracy_dict.items()):
-    col.metric(name, f"{acc*100:.2f}%")
+model_list = [
+    "KNN",
+    "Random Forest",
+    "SVM",
+    "Logistic Regression",
+    "XGBoost"
+]
 
-best_model = max(accuracy_dict, key=accuracy_dict.get)
-st.success(f"🏆 Best Performing Model: {best_model}")
+for model in model_list:
+    st.sidebar.write(f"• {model}")
 
+st.sidebar.markdown("---")
 
+# 📊 Model Ranking (Dynamic)
+st.sidebar.markdown("### 📊 Model Performance Ranking")
+
+sorted_models = sorted(accuracy_dict.items(), key=lambda x: x[1], reverse=True)
+
+for i, (name, acc) in enumerate(sorted_models, 1):
+    medal = "🥇" if i == 1 else "🥈" if i == 2 else "🥉" if i == 3 else "🔹"
+    st.sidebar.write(f"{medal} {name} — {acc*100:.2f}%")
+
+best_model = sorted_models[0][0]
+
+st.sidebar.success(f"🏆 Best Performing Model: {best_model}")
+
+st.sidebar.markdown("---")
+
+# 📂 Dataset Info
+st.sidebar.markdown("### 📂 Dataset Information")
+st.sidebar.write("""
+• Features: Social, Study, Sleep, Group,  
+  Productivity, Creativity, Leadership,  
+  Decision Speed, Consistency  
+
+• Target Classes:
+  - Independent  
+  - Analytical  
+  - Creative  
+  - Leader  
+
+• Preprocessing:
+  - StandardScaler  
+  - Label Encoding  
+""")
+
+st.sidebar.markdown("---")
+
+# ⚙ How It Works (Expandable)
+with st.sidebar.expander("⚙ How Persona-AI Works"):
+    st.write("""
+1️⃣ User enters behavioral data  
+2️⃣ Data is standardized using scaler  
+3️⃣ Selected ML model performs classification  
+4️⃣ Probability score calculated  
+5️⃣ AI report generated  
+6️⃣ Feature importance analyzed (Random Forest)  
+""")
+
+st.sidebar.markdown("---")
+
+# 🎛 Interactive Controls
+st.sidebar.markdown("### 🎛 Dashboard Controls")
+
+show_importance = st.sidebar.checkbox("🌲 Show Feature Importance", value=True)
+show_accuracy_chart = st.sidebar.checkbox("📈 Show Accuracy Chart", value=True)
+
+st.sidebar.markdown("---")
+
+# 👩‍💻 Developer Section
+st.sidebar.markdown("### 👩‍💻 Developer")
+
+st.sidebar.write("""
+**Riddhi Dulani**  
+B.Tech – Artificial Intelligence & Data Science  
+Machine Learning & Behavioral Analytics Enthusiast
+""")
+
+st.sidebar.markdown("---")
+st.sidebar.caption("© 2026 Persona-AI | Advanced ML Deployment")
 
 # --------------------------------------------------
 # 🔍 Model Selection
@@ -366,10 +435,46 @@ if st.session_state.get("prediction_done"):
             )
 
 
+# --------------------------------------------------
+# 🌲 Random Forest Feature Importance
+# --------------------------------------------------
+
+st.subheader("🌲 Random Forest Feature Importance")
+
+rf_model = models["Random Forest"]
+
+if hasattr(rf_model, "feature_importances_"):
+
+    feature_names = [
+        "Social", "Study", "Sleep", "Group",
+        "Productivity", "Creativity",
+        "Leadership", "Decision", "Consistency"
+    ]
+
+    importances = rf_model.feature_importances_
+
+    # Sort features by importance
+    sorted_idx = np.argsort(importances)
+    sorted_features = np.array(feature_names)[sorted_idx]
+    sorted_importances = importances[sorted_idx]
+
+    fig2, ax2 = plt.subplots(figsize=(8,5))
+    ax2.barh(sorted_features, sorted_importances)
+    ax2.set_title("Random Forest Feature Importance")
+    ax2.set_xlabel("Importance Score")
+
+    st.pyplot(fig2)
+
+else:
+    st.warning("Feature importance not available for this model.")
 
 
 # --------------------------------------------------
 # Footer
 # --------------------------------------------------
-st.markdown("---")
-st.caption("Advanced AI/ML Personality Classification Project | Production Ready Deployment")
+st.markdown("""
+---
+### 🚀 Persona-AI
+Developed using Machine Learning & Behavioral Analytics  
+© 2026 Riddhi Dulani | B.Tech AI & DS
+""")
