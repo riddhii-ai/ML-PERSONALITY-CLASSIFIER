@@ -3,10 +3,10 @@
 /* ============================= */
 
 :root {
-    --bg-main: #0f172a;
+    --bg-main: #0f172a; 
     --bg-secondary: #111827;
     --accent: #3b82f6;
-    --accent-soft: rgba(59, 130, 246, 0.4);
+    --accent-soft: rgba(59, 130, 246, 0.4); 
     --text-main: #e5e7eb;
     --glass: rgba(255, 255, 255, 0.05);
 }
@@ -92,4 +92,92 @@ input, textarea {
 ::-webkit-scrollbar-thumb {
     background: #2563eb;
     border-radius: 10px;
+}
+
+/* ============================= */
+/* FUTURISTIC TITLE SECTION */
+/* ============================= */
+
+.hero-section {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.hero-title {
+    font-size: 60px;
+    font-weight: 800;
+    text-align: center;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    background: linear-gradient(
+        270deg,
+        #3b82f6,
+        #00f5ff,
+        #a855f7,
+        #ff00c8,
+        #3b82f6
+    );
+
+    background-size: 800% 800%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: gradientFlow 8s ease infinite;
+
+    text-shadow:
+        0 0 10px rgba(59,130,246,0.6),
+        0 0 20px rgba(168,85,247,0.6),
+        0 0 40px rgba(255,0,200,0.6);
+}
+
+.hero-title {
+    animation: gradientFlow 8s ease infinite, pulseGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes pulseGlow {
+    from {
+        text-shadow:
+            0 0 10px rgba(59,130,246,0.6),
+            0 0 20px rgba(168,85,247,0.6);
+    }
+    to {
+        text-shadow:
+            0 0 20px rgba(0,245,255,0.9),
+            0 0 40px rgba(255,0,200,0.9),
+            0 0 60px rgba(168,85,247,0.9);
+    }
+}
+
+/* Smooth Color Flow */
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes shine {
+    to { background-position: 200% center; }
+}
+
+.hero-subtitle {
+    font-size: 20px;
+    margin-top: 15px;
+    color: #94a3b8;
+    letter-spacing: 2px;
+}
+
+.hero-tagline {
+    margin-top: 25px;
+    font-size: 16px;
+    opacity: 0.7;
+    font-style: italic;
+}
+
+.hero-divider {
+    width: 120px;
+    height: 3px;
+    background: linear-gradient(90deg, #3b82f6, transparent);
+    margin: 25px auto;
+    border-radius: 5px;
 }
