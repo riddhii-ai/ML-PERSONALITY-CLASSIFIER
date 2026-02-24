@@ -183,6 +183,31 @@ st.sidebar.caption("© 2026 Persona-AI | Advanced ML Deployment")
 # --------------------------------------------------
 # 🔍 Model Selection
 # --------------------------------------------------
+
+# --------------------------------------------------
+# 📊 MODEL ACCURACY COMPARISON (Top Section)
+# --------------------------------------------------
+
+if show_accuracy_chart:
+
+    st.markdown("## 📊 Model Accuracy Comparison")
+
+    # Create columns dynamically
+    cols = st.columns(len(accuracy_dict))
+
+    # Show metric cards
+    for col, (model_name, acc) in zip(cols, accuracy_dict.items()):
+        col.metric(
+            label=model_name,
+            value=f"{acc*100:.2f}%",
+            delta=None
+        )
+
+    # Highlight Best Model
+    best_model = max(accuracy_dict, key=accuracy_dict.get)
+    st.success(f"🏆 Best Performing Model: {best_model}")
+
+    
 st.subheader("🔍 Select Model for Prediction")
 
 model_choice = st.selectbox(
@@ -385,24 +410,18 @@ if st.session_state.get("prediction_done"):
     with col1:
         
         st.markdown(f"""
-        <div style="
-            background: linear-gradient(135deg, #E06AA1, #6E1A7A);
-            padding: 25px;
-            border-radius: 18px;
-            color: white;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-        ">
-            <h2>🎯 Predicted Personality</h2>
-            <h3>{st.session_state.prediction}</h3>
-            <p style="font-size:18px;">
-                📊 Confidence Score: <b>{st.session_state.confidence:.2f}%</b>
-            </p>
-            <hr>
-            <p>{summary}</p>
-            <p><b>Recommendation:</b> {rec}</p>
-            <p><b>Suggested Hobbies:</b><br>{hob}</p>
-        </div>
-        """, unsafe_allow_html=True)
+    <div class="glass-container">
+    <h2>🎯 Predicted Personality</h2>
+    <h3>{st.session_state.prediction}</h3>
+    <p style="font-size:18px;">
+        📊 Confidence Score: <b>{st.session_state.confidence:.2f}%</b>
+    </p>
+    <hr>
+    <p>{summary}</p>
+    <p><b>Recommendation:</b> {rec}</p>
+    <p><b>Suggested Hobbies:</b><br>{hob}</p>
+</div>
+""", unsafe_allow_html=True)
 
     # RIGHT COLUMN (Ai Report)
     with col2:
