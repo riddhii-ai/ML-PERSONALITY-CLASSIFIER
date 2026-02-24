@@ -3,6 +3,13 @@ import numpy as np
 import joblib
 import matplotlib.pyplot as plt
 import os
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.lib import colors
+from reportlab.lib.units import inch
+from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.pdfbase import pdfmetrics
+from io import BytesIO
 
 # --------------------------------------------------
 # 🎨 Page Config
@@ -398,6 +405,28 @@ Model Confidence Level: {confidence:.2f}%
 # --------------------------------------------------
 # 📊 RESULT SECTION (Two Column + Radar Chart)
 # --------------------------------------------------
+
+def generate_pdf_report(report_text):
+
+    buffer = BytesIO()
+    doc = SimpleDocTemplate(buffer)
+    elements = []
+
+    styles = getSampleStyleSheet()
+    normal_style = styles["Normal"]
+
+    # Split report into lines
+    for line in report_text.split("\n"):
+        paragraph = Paragraph(line.replace(" ", "&nbsp;"), normal_style)
+        elements.append(paragraph)
+        elements.append(Spacer(1, 0.2 * inch))
+
+    doc.build(elements)
+    buffer.seek(0)
+
+    return buffer
+
+
 if st.session_state.get("prediction_done"):
 
     
@@ -446,12 +475,14 @@ if st.session_state.get("prediction_done"):
             height=500
             )
 
+            pdf_file = generate_pdf_report(st.session_state.full_report)
+
             st.download_button(
-            label="⬇ Download Report as TXT",
-            data=st.session_state.full_report,
-            file_name="AI_Personality_Report.txt",
-            mime="text/plain"
-            )
+                label="⬇ Download Report as PDF",
+                data=pdf_file,
+                file_name="AI_Personality_Report.pdf",
+                mime="report/pdf"
+                )
 
 
 # --------------------------------------------------
