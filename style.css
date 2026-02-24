@@ -35,6 +35,11 @@
     box-shadow: 0 8px 30px rgba(0,0,0,0.4);
 }
 
+.block-container:hover {
+    box-shadow: 0 12px 40px rgba(59,130,246,0.25);
+    transition: 0.4s ease;
+}
+
 /* Title */
 .main-title {
     text-align: center;
@@ -46,12 +51,14 @@
 
 /* Buttons */
 .stButton>button {
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    background: linear-gradient(135deg, #1d4ed8, #2563eb, #3b82f6);
     color: white;
     border-radius: 12px;
     height: 3em;
     width: 100%;
     font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
     border: none;
     transition: all 0.3s ease;
 }
@@ -104,49 +111,48 @@ input, textarea {
 }
 
 .hero-title {
-    font-size: 60px;
-    font-weight: 800;
+    font-size: 64px;
+    font-weight: 900;
     text-align: center;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     text-transform: uppercase;
 
     background: linear-gradient(
-        270deg,
-        #3b82f6,
-        #00f5ff,
+        90deg,
+        #ffffff,
+        #60a5fa,
         #a855f7,
-        #ff00c8,
-        #3b82f6
+        #ffffff
     );
 
-    background-size: 800% 800%;
+    background-size: 300% 300%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 
-    animation: gradientFlow 8s ease infinite;
+    /* animation: gradientFlow 6s ease infinite; */
+    filter: drop-shadow(0 0 12px rgba(255,255,255,0.3));
 
+    /* Cleaner, stronger glow */
     text-shadow:
-        0 0 10px rgba(59,130,246,0.6),
-        0 0 20px rgba(168,85,247,0.6),
-        0 0 40px rgba(255,0,200,0.6);
-}
-
-.hero-title {
-    animation: gradientFlow 8s ease infinite, pulseGlow 2s ease-in-out infinite alternate;
+        0 0 8px rgba(59,130,246,0.6),
+        0 0 16px rgba(168,85,247,0.6);
 }
 
 @keyframes pulseGlow {
     from {
         text-shadow:
-            0 0 10px rgba(59,130,246,0.6),
-            0 0 20px rgba(168,85,247,0.6);
+            0 0 8px rgba(59,130,246,0.6),
+            0 0 16px rgba(168,85,247,0.6);
     }
     to {
         text-shadow:
-            0 0 20px rgba(0,245,255,0.9),
-            0 0 40px rgba(255,0,200,0.9),
-            0 0 60px rgba(168,85,247,0.9);
+            0 0 14px rgba(96,165,250,0.9),
+            0 0 28px rgba(168,85,247,0.8);
     }
+}
+
+.hero-title {
+    animation: gradientFlow 6s ease infinite, pulseGlow 2.5s ease-in-out infinite alternate;
 }
 
 /* Smooth Color Flow */
@@ -180,4 +186,23 @@ input, textarea {
     background: linear-gradient(90deg, #3b82f6, transparent);
     margin: 25px auto;
     border-radius: 5px;
+}
+
+/* ============================= */
+/* REUSABLE GLASS CARD */
+/* ============================= */
+
+.glass-container {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(18px);
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid rgba(59,130,246,0.25);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.35);
+    transition: all 0.3s ease;
+}
+
+.glass-container:hover {
+    box-shadow: 0 15px 45px rgba(59,130,246,0.25);
+    transform: translateY(-4px);
 }
